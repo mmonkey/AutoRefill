@@ -1,0 +1,85 @@
+#
+# Refill Configuration
+#
+# 1. Only use spaces, TABs are not allowed in config.yml
+# 2. For blocks only use the ENUM types:
+#    blocks = http://jd.bukkit.org/dev/apidocs/org/bukkit/Material.html
+
+general:
+  auto-enabled: false
+
+blocks:
+  - LOG
+  - WOOD
+  - STONE
+  - COBBLESTONE
+  - DIRT
+  - SAND
+  - GLASS
+  - ICE
+  - GRAVEL
+  - MOSSY_COBBLESTONE
+  - SANDSTONE
+  - BRICK
+  - SNOW_BLOCK
+  - CLAY_BRICK
+  - STAINED_CLAY
+  - HARD_CLAY
+  - CLAY
+  - OBSIDIAN
+  - COAL_ORE
+  - IRON_ORE
+  - IRON_BLOCK
+  - LAPIS_ORE
+  - LAPIS_BLOCK
+  - GOLD_ORE
+  - GOLD_BLOCK
+  - REDSTONE_ORE
+  - REDSTONE_BLOCK
+  - EMERALD_ORE
+  - EMERALD_BLOCK
+  - DIAMOND_ORE
+  - DIAMOND_BLOCK
+  - LEAVES
+  - WOOL
+  - NETHERRACK
+  - NETHER_BRICK
+  - SOUL_SAND
+  - MYCEL
+  - QUARTZ_ORE
+  - QUARTZ_BLOCK
+  - STEP
+  - DOUBLE_STEP
+  - COBBLESTONE_STAIRS
+  - WOOD_STEP
+  - WOOD_DOUBLE_STEP
+  - WOOD_STAIRS
+  - BIRCH_WOOD_STAIRS
+  - JUNGLE_WOOD_STAIRS
+  - SPRUCE_WOOD_STAIRS
+  - BRICK_STAIRS
+  - NETHER_BRICK_STAIRS
+  - QUARTZ_STAIRS
+  - LADDER
+  - RAILS
+  - ACTIVATOR_RAIL
+  - DETECTOR_RAIL
+  - POWERED_RAIL
+  - SIGN
+  - HUGE_MUSHROOM_1
+  - HUGE_MUSHROOM_2
+  - PUMPKIN
+  - JACK_O_LANTERN
+  - MELON_BLOCK
+  - WORKBENCH
+  - CHEST
+  - WEB
+  - COBBLE_WALL
+  - FENCE
+  - FENCE_GATE
+  - NETHER_FENCE
+  - FURNACE
+  - DISPENSER
+  - BREWING_STAND
+  - CAULDRON
+  - HOPPER
