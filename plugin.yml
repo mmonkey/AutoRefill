@@ -1,13 +1,13 @@
-name: Refill
-main: com.gmail.mmonkey.Refill.Refill
+name: AutoRefill
+main: com.gmail.mmonkey.AutoRefill.AutoRefill
 version: 1.0
 commands:
    refill:
       description: Automatically refill the block in-hand, with the same block from your inventory, when you run out.
       usage: /refill [on/off], /refill [player] [on/off]
 permissions:
-   refill.*:
-      description: Gives access to all Refill commands / functions
+   autorefill.*:
+      description: Gives access to all AutoRefill commands / functions
       children:
          refill.use: true
          refill.on: true
@@ -15,18 +15,18 @@ permissions:
          refill.player.on: true
          refill.player.off: true
       default: op
-   refill.use:
-      description: Allows player to use Refill
+   autorefill.use:
+      description: Allows player to use AutoRefill
       default: true
-   refill.on:
-      description: Allows player to turn Refill on
+   autorefill.on:
+      description: Allows player to turn AutoRefill on
       default: op
-   refill.off:
-      description: Allows player to turn Refill off
+   autorefill.off:
+      description: Allows player to turn AutoRefill off
       default: op
-   refill.player.on:
-      description: Allows player to turn on Refill for a specified player
+   autorefill.player.on:
+      description: Allows player to turn on AutoRefill for a specified player
       default: op
-   refill.player.off:
-      description: Allows player to turn off Refill for a specified player
+   autorefill.player.off:
+      description: Allows player to turn off AutoRefill for a specified player
       default: op

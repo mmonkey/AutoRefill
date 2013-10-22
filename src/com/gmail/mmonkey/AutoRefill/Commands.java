@@ -1,4 +1,4 @@
-package com.gmail.mmonkey.Refill;
+package com.gmail.mmonkey.AutoRefill;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -8,9 +8,9 @@ import org.bukkit.entity.Player;
 
 public class Commands implements CommandExecutor{
 	
-	private Refill plugin;
+	private AutoRefill plugin;
 	
-	Commands(Refill plugin) {
+	Commands(AutoRefill plugin) {
 		this.plugin = plugin;
 	}
 
@@ -34,13 +34,13 @@ public class Commands implements CommandExecutor{
 		
 		RefillPlayer p = plugin.refillList.get(player);
 		
-		//If command has no arguments, show whether Refill is enabled or disabled.
+		//If command has no arguments, show whether AutoRefill is enabled or disabled.
 		if(args.length == 0) {
 					
 			if(p.isEnabled()) {
-				player.sendMessage(ChatColor.GREEN + "Refill is enabled.");
+				player.sendMessage(ChatColor.GREEN + "AutoRefill is enabled.");
 			} else {
-				player.sendMessage(ChatColor.RED + "Refill is disabled.");
+				player.sendMessage(ChatColor.RED + "AutoRefill is disabled.");
 			}
 		
 		//Turn Refill on or off
@@ -49,34 +49,34 @@ public class Commands implements CommandExecutor{
 			if(args[0].equalsIgnoreCase("on")) {
 						
 				//Check to see if player has permission
-				if(!player.hasPermission("refill.on")) {
+				if(!player.hasPermission("autorefill.on")) {
 					player.sendMessage(ChatColor.RED + "You don't have permission.");
 					return true;
 				}
 				
 				//Turn Refill on
 				if(p.isEnabled()){
-					player.sendMessage(ChatColor.YELLOW + "Refill is already enabled.");
+					player.sendMessage(ChatColor.YELLOW + "AutoRefill is already enabled.");
 				} else {
 					p.setEnabled(true);
-					player.sendMessage(ChatColor.GREEN + "Refill is enabled.");
+					player.sendMessage(ChatColor.GREEN + "AutoRefill is enabled.");
 				}
 				
 				
 			} else if(args[0].equalsIgnoreCase("off")) {
 						
 				//Check to see if player has permission
-				if(!player.hasPermission("refill.off")) {
+				if(!player.hasPermission("autorefill.off")) {
 					player.sendMessage(ChatColor.RED + "You don't have permission.");
 					return true;
 				}
 				
 				//Turn Refill off
 				if(!p.isEnabled()) {
-					player.sendMessage(ChatColor.YELLOW + "Refill is already disabled.");
+					player.sendMessage(ChatColor.YELLOW + "AutoRefill is already disabled.");
 				} else {
 					p.setEnabled(false);
-					player.sendMessage(ChatColor.RED + "Refill is now disabled.");
+					player.sendMessage(ChatColor.RED + "AutoRefill is now disabled.");
 				}
 			
 			//Invalid Command
@@ -90,7 +90,7 @@ public class Commands implements CommandExecutor{
 			if(args[1].equalsIgnoreCase("on")) {
 						
 				//Check to see if player has permission
-				if(!player.hasPermission("refill.player.on")) {
+				if(!player.hasPermission("autorefill.player.on")) {
 					player.sendMessage(ChatColor.RED + "You don't have permission.");
 					return true;
 				}
@@ -100,21 +100,26 @@ public class Commands implements CommandExecutor{
 						
 				if(player2 != null){
 					
-					//Add player to refillList if not already
-					if(!plugin.refillList.containsKey(player2)) {
-						plugin.refillList.put(player2, new RefillPlayer(player2, plugin.enabled));
-					}
-							
-					//Pull player out of refillList
-					RefillPlayer p2 = plugin.refillList.get(player2);
-							
-					if(p2.isEnabled()){
-						player.sendMessage(ChatColor.YELLOW + "Refill is already enabled for " + args[0] + ".");
+					if(player2.hasPermission("autorefill.use")) {
+					
+						//Add player to refillList if not already
+						if(!plugin.refillList.containsKey(player2)) {
+							plugin.refillList.put(player2, new RefillPlayer(player2, plugin.enabled));
+						}
 								
+						//Pull player out of refillList
+						RefillPlayer p2 = plugin.refillList.get(player2);
+								
+						if(p2.isEnabled()){
+							player.sendMessage(ChatColor.YELLOW + "AutoRefill is already enabled for " + args[0] + ".");
+									
+						} else {
+							p2.setEnabled(true);
+							player.sendMessage(ChatColor.GREEN + "AutoRefill has been enabled for " + args[0] + ".");
+							player2.sendMessage(ChatColor.GREEN + "AutoRefill is enabled thanks to " + player.getDisplayName() + ".");
+						}
 					} else {
-						p2.setEnabled(true);
-						player.sendMessage(ChatColor.GREEN + "Refill has been enabled for " + args[0] + ".");
-						player2.sendMessage(ChatColor.GREEN + "Refill is enabled thanks to " + player.getDisplayName() + ".");
+						player.sendMessage("Player " + args[0] + " does not have permission to use AutoRefill.");
 					}
 							
 				} else {
@@ -124,7 +129,7 @@ public class Commands implements CommandExecutor{
 			} else if(args[1].equalsIgnoreCase("off")) {
 						
 				//Check to see if player has permission
-				if(!p.getPlayer().hasPermission("refill.player.off")) {
+				if(!p.getPlayer().hasPermission("autorefill.player.off")) {
 					player.sendMessage(ChatColor.RED + "You don't have permission.");
 					return true;
 				}
@@ -133,24 +138,29 @@ public class Commands implements CommandExecutor{
 				Player player2 = plugin.getServer().getPlayer(args[0]);
 						
 				if(player2 != null){
+					
+					if(player2.hasPermission("autorefill.use")) {
 							
-					//Add player to refillList if not already
-					if(!plugin.refillList.containsKey(player2)) {
-						plugin.refillList.put(player2, new RefillPlayer(player2, plugin.enabled));
-					}
-							
-					//Pull player out of refillList
-					RefillPlayer p2 = plugin.refillList.get(player2);
-							
-					if(!p2.isEnabled()){
-						player.sendMessage(ChatColor.YELLOW + "Refill is already disabled for " + args[0] + ".");
+						//Add player to refillList if not already
+						if(!plugin.refillList.containsKey(player2)) {
+							plugin.refillList.put(player2, new RefillPlayer(player2, plugin.enabled));
+						}
 								
+						//Pull player out of refillList
+						RefillPlayer p2 = plugin.refillList.get(player2);
+								
+						if(!p2.isEnabled()){
+							player.sendMessage(ChatColor.YELLOW + "AutoRefill is already disabled for " + args[0] + ".");
+									
+						} else {
+							p2.setEnabled(false);
+							player.sendMessage(ChatColor.GREEN + "AutoRefill has been disabled for " + args[0] + ".");
+							player2.sendMessage(ChatColor.GREEN + "AutoRefill has been disabled by " + player.getDisplayName() + ".");
+						}
 					} else {
-						p2.setEnabled(false);
-						player.sendMessage(ChatColor.GREEN + "Refill has been disabled for " + args[0] + ".");
-						player2.sendMessage(ChatColor.GREEN + "Refill has been disabled by " + player.getDisplayName() + ".");
+						player.sendMessage("Player " + args[0] + " does not have permission to use AutoRefill.");
 					}
-							
+					
 				} else {
 					player.sendMessage("Player " + args[0] + " not found.");
 				}

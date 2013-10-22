@@ -1,4 +1,4 @@
-package com.gmail.mmonkey.Refill;
+package com.gmail.mmonkey.AutoRefill;
 
 import org.bukkit.entity.Player;
 

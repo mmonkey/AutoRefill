@@ -1,4 +1,4 @@
-package com.gmail.mmonkey.Refill;
+package com.gmail.mmonkey.AutoRefill;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,7 +9,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class Refill extends JavaPlugin {
+public class AutoRefill extends JavaPlugin {
 	
 	public Logger log = Logger.getLogger("Minecraft");
 	public HashMap<Player, RefillPlayer> refillList = new HashMap<Player, RefillPlayer>();
@@ -23,28 +23,26 @@ public class Refill extends JavaPlugin {
 		
 		load();
 		
-		getLogger().info("Refill has been Enabled!");
+		getLogger().info("AutoRefill has been Enabled!");
         getServer().getPluginManager().registerEvents(new PlaceBlock(this), this);
         getCommand("refill").setExecutor(new Commands(this));
         
-        log.info("[Refill] By mmonkey loaded in " + (System.currentTimeMillis() - start) / 1000.0D + " seconds.");
+        log.info("[AutoRefill] By mmonkey loaded in " + (System.currentTimeMillis() - start) / 1000.0D + " seconds.");
     }
 	public void load(){
 		
 		this.saveDefaultConfig();
 		
 		this.enabled = this.getConfig().getBoolean("general.auto-enabled");
-		List<String> loadBlocks = Refill.this.getConfig().getStringList("blocks");
+		List<String> loadBlocks = AutoRefill.this.getConfig().getStringList("blocks");
 		
 		for(String s: loadBlocks) {
 			if(Material.getMaterial(s) != null){
 				configBlocks.add(Material.getMaterial(s));
 			}
 		}
-		
-		log.info("[Refill] Config Loaded.");
 	}
 	public void onDisable() {
-    	getLogger().info("Refill has been Disabled.");
+    	getLogger().info("AutoRefill has been Disabled.");
     }
 }

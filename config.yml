@@ -1,5 +1,5 @@
 #
-# Refill Configuration
+# AutoRefill Configuration
 #
 # 1. Only use spaces, TABs are not allowed in config.yml
 # 2. For blocks only use the ENUM types:

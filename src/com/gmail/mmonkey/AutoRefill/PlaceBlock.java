@@ -1,4 +1,4 @@
-package com.gmail.mmonkey.Refill;
+package com.gmail.mmonkey.AutoRefill;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -10,9 +10,9 @@ import org.bukkit.inventory.ItemStack;
 
 public class PlaceBlock implements Listener {
 
-	private Refill plugin;
+	private AutoRefill plugin;
 
-	public PlaceBlock(Refill plugin) {
+	public PlaceBlock(AutoRefill plugin) {
 		this.plugin = plugin;
 	}
 	
@@ -21,7 +21,7 @@ public class PlaceBlock implements Listener {
 		
 		final Player player = event.getPlayer();
 		
-		if(player.hasPermission("refill.use")) {
+		if(player.hasPermission("autorefill.use")) {
 			
 			if(plugin.refillList.containsKey(player)) {
 				
@@ -38,7 +38,7 @@ public class PlaceBlock implements Listener {
 						if(isReplaceable(blockType) && playerInventory.contains(blockType)) {
 							this.plugin.getServer().getScheduler().scheduleSyncDelayedTask(this.plugin, new Runnable() {
 								public void run() {
-									fillup(player, playerInventory.first(blockType));
+									refill(player, playerInventory.first(blockType));
 								}
 							}, 1L); //delays fill-up by 1 tick
 							return;
@@ -51,7 +51,7 @@ public class PlaceBlock implements Listener {
 		}
 	}
 	
-	public void fillup(Player player, int index){
+	public void refill(Player player, int index){
 		Inventory playerInventory = player.getInventory();
 		
 		if(index != -1 && index <= 8){
