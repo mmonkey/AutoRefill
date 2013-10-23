@@ -1,28 +1,28 @@
-<h1>Refill</h1>
+<h1>AutoRefill</h1>
 <p>A Bukkit plugin that refills the item in a player's hand when they have ran out. The refilled items come from that player's inventory.</p>
 <p>Version: v1.0</p>
 
 <h2>Installing & Upgrading</h2>
 <ol>
-  <li><a href="http://dev.bukkit.org/bukkit-plugins/refill/">Download</a> Refill.zip</li>
+  <li><a href="http://dev.bukkit.org/bukkit-plugins/refill/">Download</a> AutoRefill.zip</li>
   <li>Unzip Refill.zip.</li>
-  <li>Drag Refill.jar into your "craftbukkit/plugins" folder <em>&ndash; replace Refill.jar when upgrading.</em></li>
+  <li>Drag AutoRefill.jar into your "craftbukkit/plugins" folder <em>&ndash; replace AutoRefill.jar when upgrading.</em></li>
   <li>Reload the craftbukkit server.</li>
 </ol>
-<p>NOTE: If you made changes to the "config.yml" file, your changes will NOT be lost.</p>
+<p>NOTE: If you made changes to the "config.yml" file, your changes will NOT be overrode by updating the plugin.</p>
 
 <h2>Commands</h2>
-<p>Refill is very simple to use, in fact there are only two commands!</p>
+<p>AutoRefill is very simple to use, in fact there are only two commands!</p>
 <ul>
-  <li><b>/refill [on/off]</b> <em>&ndash; this turns Refill on or off.<em></li>
-  <li><b>/refill [player] [on/off]</b> <em>&ndash; this turns Refill on or off for a specific player.<em></li>
+  <li><b>/refill [on/off]</b> <em>&ndash; this turns AutoRefill on or off.<em></li>
+  <li><b>/refill [player] [on/off]</b> <em>&ndash; this turns AutoRefill on or off for a specific player.<em></li>
 </ul>
-<p>Please note that ToolSwap is <b>disabled by default.</b></p>
+<p>Please note that AutoRefill is <b>disabled by default.</b></p>
 
 <h2>Permissions</h2>
 <ul>
   <li><b>refill.* &ndash;</b> enables all permissions.</li>
-  <li><b>refill.use &ndash;</b> ToolSwap may be used by this player. <em>Note: Refill must be turned on first (either by using a command or by enabling "on-by-default" in config.yml).</em></li>
+  <li><b>refill.use &ndash;</b> AutoRefill may be used by this player. <em>Note: Refill must be turned on first (either by using a command or by enabling "on-by-default" in config.yml).</em></li>
   <li><b>refill.on &ndash;</b> enables use of "/refill on" command.</li>
   <li><b>refill.off &ndash;</b> enables use of "/refill off" command.</li>
   <li><b>refill.player.on &ndash;</b> enables use of "/refill [player] on" command.</li>
@@ -30,7 +30,7 @@
 </ul>
 
 <h2>Configuration</h2>
-<p>Refill may be configured from the default settings.</p>
+<p>AutoRefill may be configured from the default settings.</p>
 <h3>You Can:</h3>
 <ul>
   <li>Turn Refill on or off by default</li>
