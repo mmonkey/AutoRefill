@@ -30,17 +30,29 @@ public class PlaceBlock implements Listener {
 				if(p.isEnabled()){
 					
 					final Material blockType = event.getBlockPlaced().getType();
-					ItemStack inHand = player.getItemInHand();
+					final ItemStack inHand = player.getItemInHand();
 					final Inventory playerInventory = player.getInventory();
+					final short durability = inHand.getDurability();
 			
 					if(inHand.getAmount() == 1) {
 				
-						if(isReplaceable(blockType) && playerInventory.contains(blockType)) {
+						if(isRefillable(blockType) && playerInventory.contains(blockType)) {
+							
+							//Delays refill by 1 tick
 							this.plugin.getServer().getScheduler().scheduleSyncDelayedTask(this.plugin, new Runnable() {
 								public void run() {
-									refill(player, playerInventory.first(blockType));
+									int index = -1;
+									for(ItemStack i: playerInventory) {
+										index += 1;
+										if(i != null) {
+											if(i.getDurability() == durability) {
+												refill(player, index);
+												return;
+											}
+										}
+									}
 								}
-							}, 1L); //delays fill-up by 1 tick
+							}, 1L);
 							return;
 						}
 					}
@@ -66,7 +78,7 @@ public class PlaceBlock implements Listener {
 		} 
 	}
 	
-	private boolean isReplaceable(Material block) {
+	private boolean isRefillable(Material block) {
 		return plugin.configBlocks.contains(block);
 	}
 }
