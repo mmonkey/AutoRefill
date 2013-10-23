@@ -46,8 +46,10 @@ public class PlaceBlock implements Listener {
 										index += 1;
 										if(i != null) {
 											if(i.getDurability() == durability) {
-												refill(player, index);
-												return;
+												if(i.getType().equals(blockType)){
+													refill(player, index);
+													return;
+												}
 											}
 										}
 									}
