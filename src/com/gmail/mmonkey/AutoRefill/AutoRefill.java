@@ -1,5 +1,6 @@
 package com.gmail.mmonkey.AutoRefill;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -40,6 +41,14 @@ public class AutoRefill extends JavaPlugin {
 			if(Material.getMaterial(s) != null){
 				configBlocks.add(Material.getMaterial(s));
 			}
+		}
+		
+		//Start metrics
+		try {
+		    Metrics metrics = new Metrics(this);
+		    metrics.start();
+		} catch (IOException e) {
+		    // Failed to submit the stats :-(
 		}
 	}
 	public void onDisable() {

@@ -1,5 +1,6 @@
 package com.gmail.mmonkey.AutoRefill;
 
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -23,44 +24,47 @@ public class PlaceBlock implements Listener {
 		
 		if(player.hasPermission("autorefill.use")) {
 			
-			if(plugin.refillList.containsKey(player)) {
-				
-				RefillPlayer p = plugin.refillList.get(player);
-				
-				if(p.isEnabled()){
-					
-					final Material blockType = event.getBlockPlaced().getType();
-					final ItemStack inHand = player.getItemInHand();
-					final Inventory playerInventory = player.getInventory();
-					final short durability = inHand.getDurability();
+			if(player.getGameMode() != GameMode.CREATIVE) {
 			
-					if(inHand.getAmount() == 1) {
+				if(plugin.refillList.containsKey(player)) {
+					
+					RefillPlayer p = plugin.refillList.get(player);
+					
+					if(p.isEnabled()){
+						
+						final Material blockType = event.getBlockPlaced().getType();
+						final ItemStack inHand = player.getItemInHand();
+						final Inventory playerInventory = player.getInventory();
+						final short durability = inHand.getDurability();
 				
-						if(isRefillable(blockType) && playerInventory.contains(blockType)) {
-							
-							//Delays refill by 1 tick
-							this.plugin.getServer().getScheduler().scheduleSyncDelayedTask(this.plugin, new Runnable() {
-								public void run() {
-									int index = -1;
-									for(ItemStack i: playerInventory) {
-										index += 1;
-										if(i != null) {
-											if(i.getDurability() == durability) {
-												if(i.getType().equals(blockType)){
-													refill(player, index);
-													return;
+						if(inHand.getAmount() == 1) {
+					
+							if(isRefillable(blockType) && playerInventory.contains(blockType)) {
+								
+								//Delays refill by 1 tick
+								this.plugin.getServer().getScheduler().scheduleSyncDelayedTask(this.plugin, new Runnable() {
+									public void run() {
+										int index = -1;
+										for(ItemStack i: playerInventory) {
+											index += 1;
+											if(i != null) {
+												if(i.getDurability() == durability) {
+													if(i.getType().equals(blockType)){
+														refill(player, index);
+														return;
+													}
 												}
 											}
 										}
 									}
-								}
-							}, 1L);
-							return;
+								}, 1L);
+								return;
+							}
 						}
 					}
+				} else {
+					plugin.refillList.put(player, new RefillPlayer(player, plugin.enabled));
 				}
-			} else {
-				plugin.refillList.put(player, new RefillPlayer(player, plugin.enabled));
 			}
 		}
 	}
